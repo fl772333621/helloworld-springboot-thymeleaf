@@ -19,12 +19,14 @@ import java.util.Map;
 public class ThymeleafController {
 
     /**
-     * 浏览器请求网址：http://host:port/to_index，则会将index.html内容展示出来
+     * 浏览器请求网址：http://host:port/to_index，则会将index.html内容展示出来<br/>
+     * 注意：该方法的入参 Model model 可有可无，这里带上该入参是为了方便向页面传输数据
      *
      * @return templates/index.html内容
      */
     @GetMapping(path = "/to_index")
-    public String toIndex() {
+    public String toIndex(Model model) {
+        model.addAttribute("message", "Hello, the message come from " + ThymeleafController.class.getName());
         return "index";
     }
 

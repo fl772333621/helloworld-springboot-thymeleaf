@@ -1,0 +1,87 @@
+<!doctype html>
+
+<!--注意：引入thymeleaf的名称空间-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, userInfoDto-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index Page</title>
+</head>
+<body>
+<h1>字符串输出</h1>
+<p th:text="'hello SpringBoot'">hello thymeleaf</p>
+
+<h1>数学运算</h1>
+<p th:text="9 + 10"></p>
+<p th:text="10 * 10"></p>
+<p th:text="1 - 10"></p>
+<p th:text="8 / 3"></p>
+<p th:text="3 % 2"></p>
+
+<h1>操作域对象</h1>
+<p th:text="${userInfoDto}"></p>
+<p th:text="${userInfoDto.username}"></p>
+
+<h1>遍历List</h1>
+<div th:each="item:${userInfoDto.hobbies}" th:text="${item}"></div>
+
+<h1>遍历List</h1>
+<table border="1">
+    <tr>
+        <th>list.item</th>
+        <th>sta.index</th>
+        <th>sta.odd</th>
+        <th>sta.size</th>
+    </tr>
+    <tr th:each="item, sta:${userInfoDto.hobbies}">
+        <td th:text="${item}"></td>
+        <td th:text="${sta.index}"></td>
+        <td th:text="${sta.odd}"></td>
+        <td th:text="${sta.size}"></td>
+    </tr>
+</table>
+
+<h1>遍历map</h1>
+<table border="1">
+    <tr>
+        <th>map.key</th>
+        <th>map.value</th>
+    </tr>
+    <tr th:each="item:${userInfoDto.secrets}">
+        <td th:text="${item.key}"></td>
+        <td th:text="${item.value}"></td>
+    </tr>
+</table>
+
+<h1>设置属性</h1>
+<input type="text" th:attr="value=${userInfoDto.username}">
+<input type="text" th:attr="value=${userInfoDto.username}, title=${userInfoDto.username}">
+
+<h1>表单数据绑定</h1>
+<form action="" th:object="${userInfoDto}">
+    用户 <input type="text" th:value="*{username}"> <br/>
+    密码 <input type="password" th:value="*{password}"><br/>
+    隐私 <select>
+    <option th:each="item:${userInfoDto.secrets}" th:text="${item.value}"
+            th:selected="'a' eq ${item.value}"></option>
+</select>
+</form>
+
+<h1>解析html文本内容</h1>
+<p th:utext="'<span>html</span>'"></p>
+
+<h1>流程控制</h1>
+<p th:if="${userInfoDto.username} != ${userInfoDto.password}">yes</p>
+<div th:switch="${userInfoDto.username}">
+    <p th:case="rose">name is rose</p>
+    <p th:case="jack">name is jack</p>
+</div>
+
+<h1>外部引入</h1>
+<link rel="stylesheet" th:href="@{/css/index.css}">
+<script th:src="@{/js/index.js}"></script>
+<a th:href="@{/to_index}">to_index</a>
+</body>
+</html>

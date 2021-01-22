@@ -1,0 +1,25 @@
+<!doctype html>
+
+<!--注意：引入thymeleaf的名称空间-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index Page</title>
+</head>
+<body>
+<h1>Hello SpringBoot thymeleaf</h1>
+<p th:text="'Hello SpringBoot'">Hello thymeleaf</p>
+
+<h1>测试常用地址</h1>
+<a href="/">请求 / 地址，实际展示 index.html 内容</a> <br/>
+<a href="/index">请求 /index 地址，返回页面异常</a><br/>
+<a href="/index.html">请求 /index.html 地址，返回页面异常</a><br/>
+<a href="to_index">请求 /to_index 地址，实际展示 index.html 内容（Controller代码内配置了规则）</a><br/>
+
+<h1>测试Controller传递数据到页面</h1>
+<a href="/user_info">/user_info</a> <br/>
+</body>
+</html>
